@@ -1,0 +1,2 @@
+ffmpeg -i BadApple.mp4 -f wav BadApple.wav
+ffmpeg -r 15 -i pic/frame%d.png -vcodec mpeg4 -r 15 BadApple15.mp4
