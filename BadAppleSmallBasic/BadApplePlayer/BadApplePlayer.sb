@@ -1,0 +1,25 @@
+
+LCD.Clear()
+startms = EV3.Time()
+Thread.Run = LCDSub
+SpeakerSub()
+Program.Delay(1000)
+
+Sub SpeakerSub
+  For i = 0 To 27
+    Speaker.Play(30, "SD_Card/sound/" + i)
+    Speaker.Wait()
+  EndFor
+EndSub
+
+Sub LCDSub
+  idx = 0
+  While idx <= 3284
+    LCD.BmpFile(1, 0, 0, "SD_Card/picture/frame" + idx)
+    curms = EV3.Time() - startms
+    idx = Math.Floor(curms * 15 / 1000) + 1
+    waitms = Math.Floor(idx * 1000 / 15) - curms
+    Program.Delay(waitms)
+  EndWhile
+  LCD.Clear()
+EndSub
